@@ -33,6 +33,16 @@ if(WIN32 AND (X86_64 OR X86))
   endforeach()
 endif()
 
+# Only for MSVC + Clang in Debug
+if(MSVC AND CMAKE_CXX_COMPILER_ID STREQUAL "Clang")
+  message(STATUS "Clang on MSVC detected, adding SSE flags")
+  foreach(file ${lib_srcs})
+    if("${file}" MATCHES "_sse41.c")
+      set_source_files_properties("${file}" COMPILE_FLAGS "-mssse3 -msse4.1")
+    endif()
+  endforeach()
+endif()
+
 # ----------------------------------------------------------------------------------
 #         Define the library target:
 # ----------------------------------------------------------------------------------
