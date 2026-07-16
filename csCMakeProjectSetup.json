@@ -17,6 +17,7 @@
                 "BUILD_EXAMPLES": "OFF",
                 "BUILD_SHARED_LIBS": "ON",
                 "BUILD_opencv_apps": "OFF",
+                "BUILD_opencv_python3": "OFF",
                 "OPENCV_GENERATE_PKGCONFIG": "OFF",
                 "WITH_CUDA": "ON",
                 "WITH_CUDNN": "ON",
