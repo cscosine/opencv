@@ -99,6 +99,14 @@ elseif(_MLAS_REQUIRES_ASM)
   return()
 endif()
 
+if(MSVC AND (MLAS_X86_64 OR MLAS_X86))
+  set(OPENCV_DNN_MLAS_SKIP_REASON
+    "GNU-syntax .S kernels unsupported by the MSVC driver on ${CMAKE_SYSTEM_PROCESSOR}"
+    CACHE INTERNAL "" FORCE)
+  message(STATUS "MLAS: disabled on MSVC/${CMAKE_SYSTEM_PROCESSOR} (DNN will use its built-in SGEMM)")
+  return()
+endif()
+
 # x86_64 SGEMM kernels: MlasGemmFloatKernelSse / Avx / Fma3 / Avx512F
 # plus the M=1 fast paths and B-packing helpers.
 if(MLAS_X86_64)
@@ -243,15 +251,20 @@ target_compile_definitions(opencv_dnn_mlas PRIVATE
 )
 
 if(CMAKE_CXX_COMPILER_ID STREQUAL "GNU" OR CMAKE_CXX_COMPILER_ID MATCHES "Clang")
-  target_compile_options(opencv_dnn_mlas PRIVATE
-    "$<$<COMPILE_LANGUAGE:CXX>:-w>"
-    "$<$<COMPILE_LANGUAGE:CXX>:-include>"
-    "$<$<COMPILE_LANGUAGE:CXX>:cstring>"
-  )
-  # MLAS .S files lack .note.GNU-stack; tell the assembler the stack is non-exec.
-  target_compile_options(opencv_dnn_mlas PRIVATE
-    "$<$<COMPILE_LANGUAGE:ASM>:-Wa,--noexecstack>"
-  )
+  if(MSVC)
+    # from https://github.com/opencv/opencv/issues/29885 - need to fix cstring in clang
+    target_compile_options(opencv_dnn_mlas PRIVATE "$<$<COMPILE_LANGUAGE:CXX>:/FIcstring>")
+  else()
+    target_compile_options(opencv_dnn_mlas PRIVATE
+      "$<$<COMPILE_LANGUAGE:CXX>:-w>"
+      "$<$<COMPILE_LANGUAGE:CXX>:-include>"
+      "$<$<COMPILE_LANGUAGE:CXX>:cstring>"
+    )
+    # MLAS .S files lack .note.GNU-stack; tell the assembler the stack is non-exec.
+    target_compile_options(opencv_dnn_mlas PRIVATE
+      "$<$<COMPILE_LANGUAGE:ASM>:-Wa,--noexecstack>"
+    )
+  endif()
 endif()
 # platform.cpp's MlasInitAMX() calls syscall() but only includes <sys/syscall.h>,
 # not <unistd.h> where glibc declares it. It's compiled on both x86 and x86_64
