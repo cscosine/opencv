@@ -6,14 +6,16 @@
     "configurePresets": [
         {
             "name": "cscmake-project-setup",
-            "inherits": ["cscmake-project-setup-base"],
+            "inherits": [
+                "cscmake-project-setup-base"
+            ],
             "displayName": "csCMake Project Setup",
             "hidden": true,
             "cacheVariables": {
                 "OPENCV_EXTRA_MODULES_PATH": "${sourceDir}/../opencv_contrib/modules",
-                "BUILD_JAVA" : "OFF",
-                "BUILD_TESTS" : "OFF",
-                "BUILD_PERF_TESTS" : "OFF",
+                "BUILD_JAVA": "OFF",
+                "BUILD_TESTS": "OFF",
+                "BUILD_PERF_TESTS": "OFF",
                 "BUILD_EXAMPLES": "OFF",
                 "BUILD_SHARED_LIBS": "ON",
                 "BUILD_opencv_apps": "OFF",
@@ -24,7 +26,11 @@
                 "OPENCV_DNN_CUDA": "ON",
                 "WITH_CUBLAS": "ON",
                 "WITH_TBB": "ON",
-                "OPENCV_ENABLE_NONFREE": "OFF"
+                "OPENCV_ENABLE_NONFREE": "OFF",
+                "CMAKE_INSTALL_RPATH": "$ORIGIN",
+                "CMAKE_INSTALL_RPATH_USE_LINK_PATH": "OFF",
+                "CMAKE_BUILD_RPATH_USE_ORIGIN": "ON",
+                "CMAKE_SKIP_BUILD_RPATH": "ON"
             }
         },
         {
@@ -53,7 +59,6 @@
             "name": "cscmake-project-setup-linux-ubuntu24.04-x64-generic-clang-default-ninja",
             "inherits": "common-setup-linux"
         },
-
         {
             "name": "cscmake-project-setup-linux-ubuntu22.04-x64-generic-gcc-default-ninjamulticonfig",
             "$comment": "opencv not compiled for linux with ninja multiconfig"
@@ -70,7 +75,6 @@
             "name": "cscmake-project-setup-linux-ubuntu24.04-x64-generic-clang-default-ninjamulticonfig",
             "$comment": "opencv not compiled for linux with ninja multiconfig"
         },
-
         {
             "name": "cscmake-project-setup-linux-ubuntu22.04-arm64-generic-gcc-default-ninja",
             "$comment": "opencv not compiled for linux arm64"
@@ -87,7 +91,6 @@
             "name": "cscmake-project-setup-linux-ubuntu24.04-arm64-generic-clang-default-ninja",
             "$comment": "opencv not compiled for linux arm64"
         },
-
         {
             "name": "cscmake-project-setup-linux-ubuntu22.04-arm64-generic-gcc-default-ninjamulticonfig",
             "$comment": "opencv not compiled for linux arm64 ninjamulticonfig"
@@ -104,7 +107,6 @@
             "name": "cscmake-project-setup-linux-ubuntu24.04-arm64-generic-clang-default-ninjamulticonfig",
             "$comment": "opencv not compiled for linux arm64 ninjamulticonfig"
         },
-
         {
             "name": "common-setup-windows",
             "hidden": true,
@@ -116,7 +118,7 @@
                 "CUDNN_ROOT": "C:/Program Files/NVIDIA/CUDNN/v9.23",
                 "CUDNN_INCLUDE_DIR": "C:/Program Files/NVIDIA/CUDNN/v9.23/include/12.9",
                 "CUDNN_LIBRARY": "C:/Program Files/NVIDIA/CUDNN/v9.23/lib/12.9/x64/cudnn.lib",
-                "OPENCV_ALLOCATOR_STATS_COUNTER_TYPE" : "int64_t",
+                "OPENCV_ALLOCATOR_STATS_COUNTER_TYPE": "int64_t",
                 "$comment": "75 Turing (RTX 20-series, Quadro RTX), 86 Ampere desktop (RTX 3060/3070/3080/3090), 89 RTX 40-series, RTX 5000 Ada"
             },
             "environment": {
