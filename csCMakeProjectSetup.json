@@ -26,7 +26,11 @@
                 "OPENCV_DNN_CUDA": "OFF",
                 "WITH_CUBLAS": "OFF",
                 "WITH_TBB": "ON",
-                "OPENCV_ENABLE_NONFREE": "OFF"
+                "OPENCV_ENABLE_NONFREE": "OFF",
+                "CMAKE_INSTALL_RPATH": "$ORIGIN",
+                "CMAKE_INSTALL_RPATH_USE_LINK_PATH": "OFF",
+                "CMAKE_BUILD_RPATH_USE_ORIGIN": "ON",
+                "CMAKE_SKIP_BUILD_RPATH": "ON"
             }
         },
         {
