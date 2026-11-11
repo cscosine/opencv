@@ -1,16 +1,21 @@
 {
     "version": 10,
     "include": [
-        "${sourceParentDir}/csCMake/presets/csCMakeProjectSetup-base.json"
+        "${sourceParentDir}/csCMake/presets/csCMakeProjectSetup.json"
     ],
     "configurePresets": [
         {
             "name": "cscmake-project-setup",
             "inherits": [
-                "cscmake-project-setup-base"
+                "cscmake-common-project-setup"
             ],
             "displayName": "csCMake Project Setup",
             "hidden": true,
+            "environment": {
+                "CSCMAKE_WORKSPACE_ROOT": "${sourceParentDir}",
+                "CSCMAKE_ROOT": "$env{CSCMAKE_WORKSPACE_ROOT}/csCMake",
+                "CSCMAKE_BUILD_SUB_DIR": "$env{CSCMAKE_CSV1_SUB_DIR}"
+            },
             "cacheVariables": {
                 "OPENCV_EXTRA_MODULES_PATH": "${sourceDir}/../opencv_contrib/modules",
                 "BUILD_JAVA": "OFF",
@@ -32,66 +37,6 @@
                 "CMAKE_BUILD_RPATH_USE_ORIGIN": "ON",
                 "CMAKE_SKIP_BUILD_RPATH": "ON"
             }
-        },
-        {
-            "name": "cscmake-project-setup-linux-ubuntu22.04-x64-generic-gcc-default-ninja"
-        },
-        {
-            "name": "cscmake-project-setup-linux-ubuntu22.04-x64-generic-clang-default-ninja"
-        },
-        {
-            "name": "cscmake-project-setup-linux-ubuntu24.04-x64-generic-gcc-default-ninja"
-        },
-        {
-            "name": "cscmake-project-setup-linux-ubuntu24.04-x64-generic-clang-default-ninja"
-        },
-        {
-            "name": "cscmake-project-setup-linux-ubuntu22.04-x64-generic-gcc-default-ninjamulticonfig"
-        },
-        {
-            "name": "cscmake-project-setup-linux-ubuntu22.04-x64-generic-clang-default-ninjamulticonfig"
-        },
-        {
-            "name": "cscmake-project-setup-linux-ubuntu24.04-x64-generic-gcc-default-ninjamulticonfig"
-        },
-        {
-            "name": "cscmake-project-setup-linux-ubuntu24.04-x64-generic-clang-default-ninjamulticonfig"
-        },
-        {
-            "name": "cscmake-project-setup-linux-ubuntu22.04-arm64-generic-gcc-default-ninja"
-        },
-        {
-            "name": "cscmake-project-setup-linux-ubuntu22.04-arm64-generic-clang-default-ninja"
-        },
-        {
-            "name": "cscmake-project-setup-linux-ubuntu24.04-arm64-generic-gcc-default-ninja"
-        },
-        {
-            "name": "cscmake-project-setup-linux-ubuntu24.04-arm64-generic-clang-default-ninja"
-        },
-        {
-            "name": "cscmake-project-setup-linux-ubuntu22.04-arm64-generic-gcc-default-ninjamulticonfig"
-        },
-        {
-            "name": "cscmake-project-setup-linux-ubuntu22.04-arm64-generic-clang-default-ninjamulticonfig"
-        },
-        {
-            "name": "cscmake-project-setup-linux-ubuntu24.04-arm64-generic-gcc-default-ninjamulticonfig"
-        },
-        {
-            "name": "cscmake-project-setup-linux-ubuntu24.04-arm64-generic-clang-default-ninjamulticonfig"
-        },
-        {
-            "name": "cscmake-project-setup-windows-v10-x64-generic-msvc-default-msvc2022"
-        },
-        {
-            "name": "cscmake-project-setup-windows-v10-x64-generic-msvc-default-msvc2026"
-        },
-        {
-            "name": "cscmake-project-setup-windows-v10-x64-generic-msvcclang-default-msvc2022"
-        },
-        {
-            "name": "cscmake-project-setup-windows-v10-x64-generic-msvcclang-default-msvc2026"
         }
     ]
 }
