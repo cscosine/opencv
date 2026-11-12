@@ -1,16 +1,21 @@
 {
     "version": 10,
     "include": [
-        "${sourceParentDir}/csCMake/presets/csCMakeProjectSetup-base.json"
+        "${sourceParentDir}/csCMake/presets/csCMakeProjectSetup-common.json"
     ],
     "configurePresets": [
         {
             "name": "cscmake-project-setup",
             "inherits": [
-                "cscmake-project-setup-base"
+                "cscmake-common-project-setup"
             ],
             "displayName": "csCMake Project Setup",
             "hidden": true,
+            "environment": {
+                "CSCMAKE_WORKSPACE_ROOT": "${sourceParentDir}",
+                "CSCMAKE_ROOT": "$env{CSCMAKE_WORKSPACE_ROOT}/csCMake",
+                "CSCMAKE_BUILD_SUB_DIR": "$env{CSCMAKE_CSV1_SUB_DIR}"
+            },
             "cacheVariables": {
                 "OPENCV_EXTRA_MODULES_PATH": "${sourceDir}/../opencv_contrib/modules",
                 "BUILD_JAVA": "OFF",
@@ -34,7 +39,7 @@
             }
         },
         {
-            "name": "common-setup-linux",
+            "name": "cscmake-project-setup-linux",
             "hidden": true,
             "cacheVariables": {
                 "CUDA_CUDA_LIBRARY": "/usr/local/cuda/lib64/stubs/libcuda.so",
@@ -44,71 +49,7 @@
             }
         },
         {
-            "name": "cscmake-project-setup-linux-ubuntu22.04-x64-generic-gcc-default-ninja",
-            "inherits": "common-setup-linux"
-        },
-        {
-            "name": "cscmake-project-setup-linux-ubuntu22.04-x64-generic-clang-default-ninja",
-            "inherits": "common-setup-linux"
-        },
-        {
-            "name": "cscmake-project-setup-linux-ubuntu24.04-x64-generic-gcc-default-ninja",
-            "inherits": "common-setup-linux"
-        },
-        {
-            "name": "cscmake-project-setup-linux-ubuntu24.04-x64-generic-clang-default-ninja",
-            "inherits": "common-setup-linux"
-        },
-        {
-            "name": "cscmake-project-setup-linux-ubuntu22.04-x64-generic-gcc-default-ninjamulticonfig",
-            "$comment": "opencv not compiled for linux with ninja multiconfig"
-        },
-        {
-            "name": "cscmake-project-setup-linux-ubuntu22.04-x64-generic-clang-default-ninjamulticonfig",
-            "$comment": "opencv not compiled for linux with ninja multiconfig"
-        },
-        {
-            "name": "cscmake-project-setup-linux-ubuntu24.04-x64-generic-gcc-default-ninjamulticonfig",
-            "$comment": "opencv not compiled for linux with ninja multiconfig"
-        },
-        {
-            "name": "cscmake-project-setup-linux-ubuntu24.04-x64-generic-clang-default-ninjamulticonfig",
-            "$comment": "opencv not compiled for linux with ninja multiconfig"
-        },
-        {
-            "name": "cscmake-project-setup-linux-ubuntu22.04-arm64-generic-gcc-default-ninja",
-            "$comment": "opencv not compiled for linux arm64"
-        },
-        {
-            "name": "cscmake-project-setup-linux-ubuntu22.04-arm64-generic-clang-default-ninja",
-            "$comment": "opencv not compiled for linux arm64"
-        },
-        {
-            "name": "cscmake-project-setup-linux-ubuntu24.04-arm64-generic-gcc-default-ninja",
-            "$comment": "opencv not compiled for linux arm64"
-        },
-        {
-            "name": "cscmake-project-setup-linux-ubuntu24.04-arm64-generic-clang-default-ninja",
-            "$comment": "opencv not compiled for linux arm64"
-        },
-        {
-            "name": "cscmake-project-setup-linux-ubuntu22.04-arm64-generic-gcc-default-ninjamulticonfig",
-            "$comment": "opencv not compiled for linux arm64 ninjamulticonfig"
-        },
-        {
-            "name": "cscmake-project-setup-linux-ubuntu22.04-arm64-generic-clang-default-ninjamulticonfig",
-            "$comment": "opencv not compiled for linux arm64 ninjamulticonfig"
-        },
-        {
-            "name": "cscmake-project-setup-linux-ubuntu24.04-arm64-generic-gcc-default-ninjamulticonfig",
-            "$comment": "opencv not compiled for linux arm64 ninjamulticonfig"
-        },
-        {
-            "name": "cscmake-project-setup-linux-ubuntu24.04-arm64-generic-clang-default-ninjamulticonfig",
-            "$comment": "opencv not compiled for linux arm64 ninjamulticonfig"
-        },
-        {
-            "name": "common-setup-windows",
+            "name": "cscmake-project-setup-windows",
             "hidden": true,
             "cacheVariables": {
                 "CUDA_CUDA_LIBRARY": "C:/Program Files/NVIDIA GPU Computing Toolkit/CUDA/v13.3/lib/x64/cuda.lib",
@@ -119,27 +60,13 @@
                 "CUDNN_INCLUDE_DIR": "C:/Program Files/NVIDIA/CUDNN/v9.23/include/12.9",
                 "CUDNN_LIBRARY": "C:/Program Files/NVIDIA/CUDNN/v9.23/lib/12.9/x64/cudnn.lib",
                 "OPENCV_ALLOCATOR_STATS_COUNTER_TYPE": "int64_t",
-                "$comment": "75 Turing (RTX 20-series, Quadro RTX), 86 Ampere desktop (RTX 3060/3070/3080/3090), 89 RTX 40-series, RTX 5000 Ada"
-            },
-            "environment": {
-                "CS_CMAKE_PREFIX_PATH_SUFFIX": "C:/Program Files/NVIDIA/CUDNN/v9.23/"
+                "CMAKE_PREFIX_PATH": "$env{CSCMAKE_WORKSPACE_ROOT}/install/$env{CSCMAKE_CSV1_SUB_DIR};$env{CSCMAKE_WORKSPACE_ROOT}/libs/$env{CSCMAKE_CSV1_SUB_DIR};C:/Program Files/NVIDIA/CUDNN/v9.23/",
+                "$comment": "75 Turing (RTX 20-series, Quadro RTX), 86 Ampere desktop (RTX 3060/3070/3080/3090), 89 RTX 40-series, RTX 5000 Ada - CMAKE_PREFIX_PATH: the workspace folders of cscmake-common-project-setup, then cuDNN"
             }
         },
         {
-            "name": "cscmake-project-setup-windows-v10-x64-generic-msvc-default-msvc2022",
-            "inherits": "common-setup-windows"
-        },
-        {
-            "name": "cscmake-project-setup-windows-v10-x64-generic-msvc-default-msvc2026",
-            "inherits": "common-setup-windows"
-        },
-        {
-            "name": "cscmake-project-setup-windows-v10-x64-generic-msvcclang-default-msvc2022",
-            "$comment": "opencv not compiled for windows with clang"
-        },
-        {
-            "name": "cscmake-project-setup-windows-v10-x64-generic-msvcclang-default-msvc2026",
-            "$comment": "opencv not compiled for windows with clang"
+            "name": "cscmake-project-setup-macos",
+            "hidden": true
         }
     ]
 }
