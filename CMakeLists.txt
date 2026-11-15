@@ -73,6 +73,12 @@ endif()
 
 project(OpenCV CXX C)
 
+# csCMakeProjectSetup.json sets the install RPATH to $ORIGIN (the folder of the library): its macOS
+# equivalent is @loader_path, so that the installed libraries find each other (@rpath/libopencv_*.dylib)
+if(APPLE AND CMAKE_INSTALL_RPATH STREQUAL "$ORIGIN")
+  set(CMAKE_INSTALL_RPATH "@loader_path" CACHE STRING "install RPATH (macOS: @loader_path)" FORCE)
+endif()
+
 if(OPENCV_WORKAROUND_CMAKE_20989)
   set(CMAKE_SYSTEM_PROCESSOR ${CMAKE_SYSTEM_PROCESSOR_BACKUP})
 endif()
