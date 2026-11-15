@@ -79,6 +79,13 @@ if(APPLE AND CMAKE_INSTALL_RPATH STREQUAL "$ORIGIN")
   set(CMAKE_INSTALL_RPATH "@loader_path" CACHE STRING "install RPATH (macOS: @loader_path)" FORCE)
 endif()
 
+# macOS: no package manager dependency, the libraries are self-contained. The contrib freetype module would link the
+# freetype and harfbuzz of Homebrew when they happen to be installed (GitHub runners: /opt/homebrew/opt/...), a path
+# the consumers do not have: off by default
+if(APPLE AND NOT DEFINED BUILD_opencv_freetype)
+  set(BUILD_opencv_freetype OFF CACHE BOOL "macOS: freetype and harfbuzz would come from Homebrew")
+endif()
+
 if(OPENCV_WORKAROUND_CMAKE_20989)
   set(CMAKE_SYSTEM_PROCESSOR ${CMAKE_SYSTEM_PROCESSOR_BACKUP})
 endif()
