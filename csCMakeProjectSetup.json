@@ -1,0 +1,72 @@
+{
+    "version": 10,
+    "include": [
+        "${sourceParentDir}/csCMake/presets/csCMakeProjectSetup-common.json"
+    ],
+    "configurePresets": [
+        {
+            "name": "cscmake-project-setup",
+            "inherits": [
+                "cscmake-common-project-setup"
+            ],
+            "displayName": "csCMake Project Setup",
+            "hidden": true,
+            "environment": {
+                "CSCMAKE_WORKSPACE_ROOT": "${sourceParentDir}",
+                "CSCMAKE_ROOT": "$env{CSCMAKE_WORKSPACE_ROOT}/csCMake",
+                "CSCMAKE_BUILD_SUB_DIR": "$env{CSCMAKE_CSV1_SUB_DIR}"
+            },
+            "cacheVariables": {
+                "OPENCV_EXTRA_MODULES_PATH": "${sourceDir}/../opencv_contrib/modules",
+                "BUILD_JAVA": "OFF",
+                "BUILD_TESTS": "OFF",
+                "BUILD_PERF_TESTS": "OFF",
+                "BUILD_EXAMPLES": "OFF",
+                "BUILD_SHARED_LIBS": "ON",
+                "BUILD_opencv_apps": "OFF",
+                "BUILD_opencv_python3": "OFF",
+                "OPENCV_GENERATE_PKGCONFIG": "OFF",
+                "WITH_CUDA": "ON",
+                "WITH_CUDNN": "ON",
+                "OPENCV_DNN_CUDA": "ON",
+                "WITH_CUBLAS": "ON",
+                "WITH_TBB": "ON",
+                "OPENCV_ENABLE_NONFREE": "OFF",
+                "CMAKE_INSTALL_RPATH": "$ORIGIN",
+                "CMAKE_INSTALL_RPATH_USE_LINK_PATH": "OFF",
+                "CMAKE_BUILD_RPATH_USE_ORIGIN": "ON",
+                "CMAKE_SKIP_BUILD_RPATH": "ON"
+            }
+        },
+        {
+            "name": "cscmake-project-setup-linux",
+            "hidden": true,
+            "cacheVariables": {
+                "CUDA_CUDA_LIBRARY": "/usr/local/cuda/lib64/stubs/libcuda.so",
+                "CUDA_ARCH_BIN": "75;86;87;89",
+                "CUDA_ARCH_PTX": "",
+                "$comment": "75 Turing (RTX 20-series, Quadro RTX), 86 Ampere desktop (RTX 3060/3070/3080/3090), 87 Jetson Orin Nano, 89 RTX 40-series, RTX 5000 Ada - CUDA_CUDA_LIBRARY points to a stub library for compilation reason only"
+            }
+        },
+        {
+            "name": "cscmake-project-setup-windows",
+            "hidden": true,
+            "cacheVariables": {
+                "CUDA_CUDA_LIBRARY": "C:/Program Files/NVIDIA GPU Computing Toolkit/CUDA/v13.3/lib/x64/cuda.lib",
+                "CUDA_TOOLKIT_ROOT_DIR": "C:/Program Files/NVIDIA GPU Computing Toolkit/CUDA/v13.3",
+                "CUDA_ARCH_BIN": "75;86;87",
+                "CUDA_ARCH_PTX": "",
+                "CUDNN_ROOT": "C:/Program Files/NVIDIA/CUDNN/v9.23",
+                "CUDNN_INCLUDE_DIR": "C:/Program Files/NVIDIA/CUDNN/v9.23/include/12.9",
+                "CUDNN_LIBRARY": "C:/Program Files/NVIDIA/CUDNN/v9.23/lib/12.9/x64/cudnn.lib",
+                "OPENCV_ALLOCATOR_STATS_COUNTER_TYPE": "int64_t",
+                "CMAKE_PREFIX_PATH": "$env{CSCMAKE_WORKSPACE_ROOT}/install/$env{CSCMAKE_CSV1_SUB_DIR};$env{CSCMAKE_WORKSPACE_ROOT}/libs/$env{CSCMAKE_CSV1_SUB_DIR};C:/Program Files/NVIDIA/CUDNN/v9.23/",
+                "$comment": "75 Turing (RTX 20-series, Quadro RTX), 86 Ampere desktop (RTX 3060/3070/3080/3090), 89 RTX 40-series, RTX 5000 Ada - CMAKE_PREFIX_PATH: the workspace folders of cscmake-common-project-setup, then cuDNN"
+            }
+        },
+        {
+            "name": "cscmake-project-setup-macos",
+            "hidden": true
+        }
+    ]
+}
