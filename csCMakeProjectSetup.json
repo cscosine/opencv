@@ -1,0 +1,58 @@
+{
+    "version": 10,
+    "include": [
+        "${sourceParentDir}/csCMake/presets/csCMakeProjectSetup-common.json"
+    ],
+    "configurePresets": [
+        {
+            "name": "cscmake-project-setup",
+            "inherits": [
+                "cscmake-common-project-setup"
+            ],
+            "displayName": "csCMake Project Setup",
+            "hidden": true,
+            "environment": {
+                "CSCMAKE_WORKSPACE_ROOT": "${sourceParentDir}",
+                "CSCMAKE_ROOT": "$env{CSCMAKE_WORKSPACE_ROOT}/csCMake",
+                "CSCMAKE_BUILD_SUB_DIR": "$env{CSCMAKE_CSV1_SUB_DIR}"
+            },
+            "cacheVariables": {
+                "OPENCV_EXTRA_MODULES_PATH": "${sourceDir}/../opencv_contrib/modules",
+                "BUILD_JAVA": "OFF",
+                "BUILD_TESTS": "OFF",
+                "BUILD_PERF_TESTS": "OFF",
+                "BUILD_EXAMPLES": "OFF",
+                "BUILD_SHARED_LIBS": "ON",
+                "BUILD_opencv_apps": "OFF",
+                "BUILD_opencv_python3": "OFF",
+                "OPENCV_GENERATE_PKGCONFIG": "OFF",
+                "WITH_CUDA": "OFF",
+                "WITH_CUDNN": "OFF",
+                "OPENCV_DNN_CUDA": "OFF",
+                "WITH_CUBLAS": "OFF",
+                "WITH_TBB": "ON",
+                "OPENCV_ENABLE_NONFREE": "OFF",
+                "CMAKE_INSTALL_RPATH": "$ORIGIN",
+                "CMAKE_INSTALL_RPATH_USE_LINK_PATH": "OFF",
+                "CMAKE_BUILD_RPATH_USE_ORIGIN": "ON",
+                "CMAKE_SKIP_BUILD_RPATH": "ON"
+            }
+        },
+        {
+            "name": "cscmake-project-setup-linux",
+            "hidden": true
+        },
+        {
+            "name": "cscmake-project-setup-windows",
+            "hidden": true
+        },
+        {
+            "name": "cscmake-project-setup-macos",
+            "hidden": true,
+            "cacheVariables": {
+                "CMAKE_OSX_DEPLOYMENT_TARGET": "13.3",
+                "CMAKE_PROJECT_INCLUDE": "modules/scripts/csRecordMacosDeploymentTarget"
+            }
+        }
+    ]
+}
