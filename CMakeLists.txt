@@ -95,6 +95,12 @@ if(OPENCV_WORKAROUND_CMAKE_20989)
 endif()
 
 include(CheckLanguage)
+# cscosine: assemble with the build's C compiler. check_language(ASM) probes in a separate project and, with
+# CMake < 4, takes the default `cc` (GCC in a clang build), which then gets the build's clang-only flags
+# (-Wcast-function-type-strict) on the MLAS .S kernels. Not on MSVC, whose ASM handling is unchanged.
+if(NOT CMAKE_ASM_COMPILER AND NOT MSVC AND CMAKE_C_COMPILER)
+  set(CMAKE_ASM_COMPILER "${CMAKE_C_COMPILER}")
+endif()
 check_language(ASM)
 if(CMAKE_ASM_COMPILER)
   enable_language(ASM)
