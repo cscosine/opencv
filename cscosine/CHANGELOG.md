@@ -1,6 +1,13 @@
 # Changelog of the cscosine fork of OpenCV
 
-## v5.1.0-cpu.1 (and v5.1.0-cuda.1, to tag once csopencvcuda has built it)
+## v5.1.0-cpu.3 (and v5.1.0-cuda.1, to tag once csopencvcuda has built it)
+
+- ASM: assemble with the build's C compiler (root `CMakeLists.txt`). With CMake < 4, `check_language(ASM)` picked
+  GCC's `cc` in a clang build, which failed on the clang-only `-Wcast-function-type-strict` on the MLAS kernels.
+
+## v5.1.0-cpu.2 (never released: the same fix in `3rdparty/mlas`, too late: the root `CMakeLists.txt` probes first)
+
+## v5.1.0-cpu.1 (never released: the Linux clang builds failed)
 
 - Rebased on upstream `5.1.0`. KleidiCV 26.09 dropped: upstream has it (opencv/opencv#30128).
 - Branches renamed to the final layout: `main` (common), `cpu`, `cuda`; opencv_contrib follows the same layout and
