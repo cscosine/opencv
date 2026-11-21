@@ -44,6 +44,7 @@ Older tags stay, because released builds point to them: `v5.0.0-cpu.1` (the 5.0.
 | csCMake presets (`CMakePresets.json`) | Built with the csCMake presets on every platform |
 | Windows: MSVC and clang-cl (libwebp AVX2 flag, MLAS) | clang-cl needs `-mavx2`; MLAS's GNU-syntax assembler is not supported by MSVC drivers; `<cstring>` (opencv/opencv#29885) |
 | macOS: install RPATH `@loader_path`, contrib freetype off | The installed libraries find each other; no dependency on Homebrew's freetype / harfbuzz |
+| MLAS: assemble with the build's C compiler | With CMake < 4, `check_language(ASM)` picks GCC's `cc` in a clang build, which fails on clang-only flags (Linux clang, 5.1.0) |
 
 ## Syncing with a new upstream release
 

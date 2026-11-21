@@ -129,6 +129,12 @@ if(MSVC AND MLAS_ARM64)
     set(MLAS_HAS_ASM TRUE CACHE INTERNAL "" FORCE)
   endif()
 else()
+  # Assemble with the build's C compiler. check_language(ASM) probes in a separate project and, with CMake < 4,
+  # takes the default `cc` (GCC under a clang build), which then gets the clang-only flags of the build
+  # (-Wcast-function-type-strict) and fails.
+  if(NOT CMAKE_ASM_COMPILER AND NOT MSVC AND CMAKE_C_COMPILER)
+    set(CMAKE_ASM_COMPILER "${CMAKE_C_COMPILER}")
+  endif()
   check_language(ASM)
   if(CMAKE_ASM_COMPILER)
     enable_language(ASM)
