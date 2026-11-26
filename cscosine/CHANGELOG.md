@@ -1,5 +1,10 @@
 # Changelog of the cscosine fork of OpenCV
 
+## v5.1.0-cpu.4
+
+- No source change: the same tree as `v5.1.0-cpu.3`, built by csopencvcpu on third_party_base_libs 0.1.1 (a release
+  of the distribution needs a new fork tag).
+
 ## v5.1.0-cpu.3 (and v5.1.0-cuda.1, to tag once csopencvcuda has built it)
 
 - ASM: assemble with the build's C compiler (root `CMakeLists.txt`). With CMake < 4, `check_language(ASM)` picked
